@@ -47,6 +47,8 @@ https://你的网址/?name=朋友名字&audio=custom
 - `index.html`: 页面结构
 - `styles.css`: 舞台、弹吉他和字幕动画
 - `script.js`: 原创摇滚音乐、彩带、字幕和个性化链接
+- `assets/birthday-rock.wav`: 手机端优先播放的内置音轨
+- `assets/share-card.png`: 微信链接预览封面图
 - `assets/rock-dog.png`: 透明背景电吉他小狗
 - `assets/reference-dog.jpeg`: 你提供的小狗参考图
 - `assets/butter-dog.png`: 第一版透明背景黄油小狗备份

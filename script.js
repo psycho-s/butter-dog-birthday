@@ -27,6 +27,7 @@ let audioContext;
 let masterGain;
 let guitarGain;
 let customAudio;
+let showAudio;
 let timers = [];
 let activeNodes = [];
 let isPlaying = false;
@@ -80,6 +81,11 @@ function stopTrackedNodes() {
   if (customAudio) {
     customAudio.pause();
     customAudio.currentTime = 0;
+  }
+
+  if (showAudio) {
+    showAudio.pause();
+    showAudio.currentTime = 0;
   }
 
   activeNodes.forEach((node) => {
@@ -176,6 +182,16 @@ function playVocalBlip(time, note) {
   playTone({ note: note + 12, time: time + 0.018, duration: 0.13, type: "triangle", gain: 0.042 });
 }
 
+async function playAudioFile(audio, fallbackDuration = 26000) {
+  audio.pause();
+  audio.currentTime = 0;
+  await audio.play();
+  if (Number.isFinite(audio.duration) && audio.duration > 0) {
+    return audio.duration * 1000;
+  }
+  return fallbackDuration;
+}
+
 function scheduleBirthdayRock(startTime) {
   const bpm = 156;
   const beat = 60 / bpm;
@@ -231,22 +247,32 @@ function scheduleBirthdayRock(startTime) {
 }
 
 async function startAudio() {
+  stopTrackedNodes();
+
   if (params.get("audio") === "custom") {
     try {
       if (!customAudio) {
         customAudio = new Audio("assets/birthday-track.mp3");
         customAudio.preload = "auto";
+        customAudio.setAttribute("playsinline", "");
         customAudio.volume = 0.9;
       }
-      customAudio.currentTime = 0;
-      await customAudio.play();
-      if (Number.isFinite(customAudio.duration) && customAudio.duration > 0) {
-        return customAudio.duration * 1000;
-      }
-      return 28000;
+      return await playAudioFile(customAudio, 28000);
     } catch {
       /* Fall back to the built-in original rock beat. */
     }
+  }
+
+  try {
+    if (!showAudio) {
+      showAudio = new Audio("assets/birthday-rock.wav");
+      showAudio.preload = "auto";
+      showAudio.setAttribute("playsinline", "");
+      showAudio.volume = 0.95;
+    }
+    return await playAudioFile(showAudio, 26000);
+  } catch {
+    /* Fall back to Web Audio synthesis if file playback is blocked. */
   }
 
   const context = createAudioContext();
@@ -256,7 +282,6 @@ async function startAudio() {
     await context.resume();
   }
 
-  stopTrackedNodes();
   const startTime = context.currentTime + 0.08;
   return scheduleBirthdayRock(startTime) * 1000;
 }
