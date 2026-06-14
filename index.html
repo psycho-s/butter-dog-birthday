@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#ff5a3d" />
+    <meta property="og:title" content="黄油小狗摇滚生日专场" />
+    <meta property="og:description" content="点开有一只黄油小狗抱着电吉他为你开麦。" />
+    <meta property="og:image" content="assets/rock-dog.png" />
+    <title>黄油小狗摇滚生日专场</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell" aria-live="polite">
+      <section class="stage" aria-label="黄油小狗生日舞台">
+        <div class="stage-lights" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <header class="top-sign">
+          <p class="venue">xx 嗨嗨专场</p>
+          <h1><span id="friendName">最好的你</span>，生日快乐</h1>
+        </header>
+
+        <div class="marquee" aria-hidden="true">
+          <div>
+            <span>生日快乐</span>
+            <span>黄油小狗开麦</span>
+            <span>电吉他加倍</span>
+            <span>生日快乐</span>
+          </div>
+        </div>
+
+        <div class="dance-floor">
+          <div class="steam steam-a" aria-hidden="true"></div>
+          <div class="steam steam-b" aria-hidden="true"></div>
+          <div class="steam steam-c" aria-hidden="true"></div>
+          <div id="lyricBoard" class="lyric-board">准备开麦</div>
+          <div class="dog-wrap" aria-hidden="true">
+            <img class="dog" src="assets/rock-dog.png" alt="" />
+            <div class="dog-shadow"></div>
+          </div>
+          <div class="guitar-burst" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="music-notes" aria-hidden="true">
+            <span>♪</span>
+            <span>♩</span>
+            <span>♫</span>
+          </div>
+        </div>
+
+        <div class="hotpot" aria-hidden="true">
+          <div class="pot-rim"></div>
+          <div class="soup">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="pot-base"></div>
+        </div>
+
+        <footer class="message-strip">
+          <p id="birthdayLine">今天全场只为你鼓掌。</p>
+          <button id="playButton" type="button" aria-pressed="false">
+            <span class="button-icon" aria-hidden="true"></span>
+            <span class="button-label">点一下开麦</span>
+          </button>
+        </footer>
+      </section>
+
+      <div id="confettiLayer" class="confetti-layer" aria-hidden="true"></div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
